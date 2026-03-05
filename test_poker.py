@@ -1,5 +1,5 @@
 import unittest
-from poker import Card, evaluate_5_cards
+from poker import Card, evaluate_5_cards, best_hand
 
 class TestPoker(unittest.TestCase):
     def test_high_card(self):
@@ -61,6 +61,12 @@ class TestPoker(unittest.TestCase):
         score, name = evaluate_5_cards(cards)
         self.assertEqual(name, "Straight flush")
         self.assertEqual(score[0], 8)
+
+    def test_best_hand_selection(self):
+        board = [Card(14, 'Hearts'), Card(2, 'Spades'), Card(3, 'Clubs'), Card(4, 'Diamonds'), Card(9, 'Hearts')]
+        hole = [Card(5, 'Clubs'), Card(13, 'Spades')]
+        score, cards, name = best_hand(hole, board)
+        self.assertEqual(name, "Straight")
 
 if __name__ == '__main__':
     unittest.main()
