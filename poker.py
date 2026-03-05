@@ -26,6 +26,12 @@ def evaluate_5_cards(cards):
     pattern = [x[1] for x in counts_sorted]
     ranked_vals = [x[0] for x in counts_sorted]
 
+    if is_straight and is_flush:
+        return (8, ranks), "Straight flush"
+    if pattern == [4, 1]:
+        return (7, ranked_vals), "Four of a kind"
+    if pattern == [3, 2]:
+        return (6, ranked_vals), "Full house"
     if is_flush:
         return (5, ranks), "Flush"
     if is_straight:
