@@ -26,5 +26,23 @@ class TestPoker(unittest.TestCase):
         self.assertEqual(name, "Three of a kind")
         self.assertEqual(score[0], 3)
 
+    def test_straight(self):
+        cards = [Card(9, 'Hearts'), Card(8, 'Spades'), Card(7, 'Clubs'), Card(6, 'Diamonds'), Card(5, 'Hearts')]
+        score, name = evaluate_5_cards(cards)
+        self.assertEqual(name, "Straight")
+        self.assertEqual(score[0], 4)
+
+    def test_straight_ace_low(self):
+        cards = [Card(14, 'Hearts'), Card(5, 'Spades'), Card(4, 'Clubs'), Card(3, 'Diamonds'), Card(2, 'Hearts')]
+        score, name = evaluate_5_cards(cards)
+        self.assertEqual(name, "Straight")
+        self.assertEqual(score[1], [5, 4, 3, 2, 14])
+
+    def test_flush(self):
+        cards = [Card(10, 'Hearts'), Card(8, 'Hearts'), Card(7, 'Hearts'), Card(4, 'Hearts'), Card(2, 'Hearts')]
+        score, name = evaluate_5_cards(cards)
+        self.assertEqual(name, "Flush")
+        self.assertEqual(score[0], 5)
+
 if __name__ == '__main__':
     unittest.main()
