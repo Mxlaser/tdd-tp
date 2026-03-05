@@ -1,4 +1,4 @@
-# TP TDD - Poker Hand Evaluator
+# TP TDD - Poker 
 
 * **Validité des entrées :** Le programme suppose que les données en entrée sont valides. Il n'y a pas de vérification pour rejeter des formats invalides ou des cartes qui n'existent pas.
 * **Doublons :** Le programme suppose qu'il n'y a pas de triche et donc qu'il n'y a aucune carte en double distribuée entre le plateau et les mains des joueurs.
