@@ -59,4 +59,22 @@ def best_hand(hole_cards, board):
             best_cards = list(combo)
             best_name = name
             
+    counts = collections.Counter(c.rank for c in best_cards)
+    is_ace_low = set(c.rank for c in best_cards) == {14, 2, 3, 4, 5}
+    
+    if is_ace_low and best_name in ["Straight", "Straight flush"]:
+        best_cards.sort(key=lambda c: c.rank if c.rank != 14 else 1, reverse=True)
+    else:
+        best_cards.sort(key=lambda c: (counts[c.rank], c.rank), reverse=True)
+        
     return best_score, best_cards, best_name
+
+def compare_players(players_holes, board):
+    best_scores = []
+    for hole in players_holes:
+        score, cards, name = best_hand(hole, board)
+        best_scores.append(score)
+        
+    max_score = max(best_scores)
+    winners = [i for i, score in enumerate(best_scores) if score == max_score]
+    return winners
