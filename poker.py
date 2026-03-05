@@ -16,6 +16,10 @@ def evaluate_5_cards(cards):
     pattern = [x[1] for x in counts_sorted]
     ranked_vals = [x[0] for x in counts_sorted]
 
+    if pattern == [3, 1, 1]:
+        return (3, ranked_vals), "Three of a kind"
+    if pattern == [2, 2, 1]:
+        return (2, ranked_vals), "Two pair"
     if pattern == [2, 1, 1, 1]:
         return (1, ranked_vals), "One pair"
     
