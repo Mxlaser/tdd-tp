@@ -1,5 +1,5 @@
 import unittest
-from poker import Card, evaluate_5_cards, best_hand
+from poker import Card, evaluate_5_cards
 
 class TestPoker(unittest.TestCase):
     def test_high_card(self):
