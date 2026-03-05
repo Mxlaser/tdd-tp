@@ -1,5 +1,5 @@
 import unittest
-from poker import Card, evaluate_5_cards, best_hand
+from poker import Card, evaluate_5_cards, best_hand, compare_players
 
 class TestPoker(unittest.TestCase):
     def test_high_card(self):
@@ -67,6 +67,27 @@ class TestPoker(unittest.TestCase):
         hole = [Card(5, 'Clubs'), Card(13, 'Spades')]
         score, cards, name = best_hand(hole, board)
         self.assertEqual(name, "Straight")
+
+    def test_best_hand_ordering(self):
+        board = [Card(2, 'Hearts'), Card(10, 'Spades'), Card(10, 'Clubs'), Card(10, 'Diamonds'), Card(3, 'Hearts')]
+        hole = [Card(10, 'Hearts'), Card(4, 'Clubs')]
+        score, cards, name = best_hand(hole, board)
+        self.assertEqual(cards[0].rank, 10)
+        self.assertEqual(cards[4].rank, 4)
+
+    def test_compare_players_kicker(self):
+        board = [Card(7, 'Hearts'), Card(7, 'Spades'), Card(7, 'Clubs'), Card(7, 'Diamonds'), Card(2, 'Clubs')]
+        p1 = [Card(14, 'Hearts'), Card(13, 'Spades')]
+        p2 = [Card(12, 'Hearts'), Card(11, 'Spades')]
+        winners = compare_players([p1, p2], board)
+        self.assertEqual(winners, [0])
+
+    def test_compare_players_tie(self):
+        board = [Card(5, 'Hearts'), Card(6, 'Spades'), Card(7, 'Clubs'), Card(8, 'Diamonds'), Card(9, 'Clubs')]
+        p1 = [Card(14, 'Hearts'), Card(14, 'Spades')]
+        p2 = [Card(13, 'Hearts'), Card(12, 'Spades')]
+        winners = compare_players([p1, p2], board)
+        self.assertEqual(winners, [0, 1])
 
 if __name__ == '__main__':
     unittest.main()
