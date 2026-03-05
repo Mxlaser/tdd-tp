@@ -8,5 +8,11 @@ class TestPoker(unittest.TestCase):
         self.assertEqual(name, "High card")
         self.assertEqual(score[0], 0)
 
+    def test_one_pair(self):
+        cards = [Card(10, 'Hearts'), Card(10, 'Spades'), Card(7, 'Clubs'), Card(4, 'Diamonds'), Card(2, 'Hearts')]
+        score, name = evaluate_5_cards(cards)
+        self.assertEqual(name, "One pair")
+        self.assertEqual(score[0], 1)
+
 if __name__ == '__main__':
     unittest.main()
