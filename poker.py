@@ -1,4 +1,5 @@
 import collections
+import itertools
 
 class Card:
     def __init__(self, rank, suit):
@@ -44,3 +45,18 @@ def evaluate_5_cards(cards):
         return (1, ranked_vals), "One pair"
     
     return (0, ranks), "High card"
+
+def best_hand(hole_cards, board):
+    all_cards = hole_cards + board
+    best_score = (-1, [])
+    best_cards = []
+    best_name = ""
+    
+    for combo in itertools.combinations(all_cards, 5):
+        score, name = evaluate_5_cards(combo)
+        if score > best_score:
+            best_score = score
+            best_cards = list(combo)
+            best_name = name
+            
+    return best_score, best_cards, best_name
